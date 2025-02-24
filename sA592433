@@ -1,0 +1,37 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample Customer Data
+data = {
+    "Customer": ["Alice", "Bob", "Charlie", "David", "Eva"],
+    "Age": [25, 34, 45, 23, 37],
+    "Purchases": [10, 5, 2, 15, 7],
+    "Spent ($)": [500, 250, 80, 700, 400]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Identify High-Value Customers
+high_value = df[df["Spent ($)"] > 400]
+
+# Marketing Strategy Suggestion
+def suggest_strategy(spent):
+    if spent > 500:
+        return "Loyalty Program & VIP Discounts"
+    elif spent > 300:
+        return "Exclusive Offers & Personalized Emails"
+    else:
+        return "Social Media & Email Campaigns"
+
+df["Marketing Strategy"] = df["Spent ($)"].apply(suggest_strategy)
+
+# Display Data
+print(df)
+
+# Visualization - Spending vs Purchases
+plt.bar(df["Customer"], df["Spent ($)"], color=['blue', 'green', 'red', 'purple', 'orange'])
+plt.xlabel("Customers")
+plt.ylabel("Money Spent ($)")
+plt.title("Customer Spending Analysis")
+plt.show()
